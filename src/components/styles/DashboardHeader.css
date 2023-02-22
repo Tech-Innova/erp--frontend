@@ -1,0 +1,66 @@
+@import "../../App.css";
+
+.root-dash-header {
+  border-bottom: 1px solid var(--grey);
+}
+.dash-header {
+  margin: 25px 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.dash-header-left {
+  display: flex;
+}
+.dash-header-title {
+  margin-left: 40px;
+  font-weight: 600;
+  font-size: 25px;
+  color: var(--black);
+}
+.dash-header-title-expand {
+  margin-left: 270px;
+  font-size: 25px;
+  color: var(--black);
+  font-weight: 600;
+  transition: 350ms;
+}
+.dash-header-username {
+  color: var(--black);
+  font-weight: 600;
+  font-size: 14px;
+}
+
+@media (max-width: 1536px) {
+  .dash-header {
+    margin: 20px 32px;
+  }
+  .dash-header-title {
+    margin-left: 32px;
+    font-size: 20px;
+  }
+  .dash-header-title-expand {
+    margin-left: 216px;
+    font-size: 20px;
+  }
+  .dash-header-username {
+    font-size: 11px;
+  }
+}
+
+@media (max-width: 1280px) {
+  .dash-header {
+    margin: 17px 30px;
+  }
+  .dash-header-title {
+    margin-left: 30px;
+    font-size: 17px;
+  }
+  .dash-header-title-expand {
+    margin-left: 180px;
+    font-size: 17px;
+  }
+  .dash-header-username {
+    font-size: 9px;
+  }
+}
