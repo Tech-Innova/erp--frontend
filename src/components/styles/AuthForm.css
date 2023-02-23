@@ -1,36 +1,55 @@
+/* Importing the App.css file from two levels up the current directory. */
 @import "../../App.css";
 
+/* Set the color of the text on the body element to a dark grey color. */
 body {
   color: var(--grey-dark);
 }
+
+/* A container for all the elements. */
 .root {
   display: flex;
   justify-content: center;
   flex-direction: row;
 }
+
+/* A container for the login form. */
 .container {
   width: auto;
   background-color: var(--white);
   border-radius: 10px;
 }
+
+/* A container for the header of the login form. */
 .header {
   background: var(--primary);
   border-radius: 10px 10px 0px 0px;
-  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   height: 73px;
   margin-bottom: 58px;
 }
-.logo {
-  margin: 18px;
+
+/* The authentication logo in the login form. */
+.auth-logo {
+  width: 92px;
+  height: 40px;
 }
+
+/* The section of the login form containing the form fields. */
 .formSec {
   text-align: center;
 }
+
+/* The form fields in the login form. */
 .form {
   display: flex;
   flex-direction: column;
   row-gap: 25px;
 }
+
+/* The input fields in the login form. */
 .inputField {
   width: 376px;
   height: 44px;
@@ -38,10 +57,14 @@ body {
   border: 2px solid var(--grey);
   border-radius: 7px;
 }
+
+/* Placeholder text for the input fields in the login form. */
 ::placeholder {
   font-weight: 500;
   font-size: 16px;
 }
+
+/* The forget password option in the login form. */
 .forgetPassword {
   font-weight: 400;
   font-size: 14px;
@@ -51,6 +74,8 @@ body {
   color: var(--primary);
   cursor: pointer;
 }
+
+/* The login button in the login form. */
 .inputFieldButton {
   width: 380px;
   height: 48px;
@@ -64,6 +89,8 @@ body {
   color: var(--white);
   cursor: pointer;
 }
+
+/* The Google authentication option in the login form. */
 .googleAuth {
   display: flex;
   flex-direction: row;
@@ -81,6 +108,8 @@ body {
   font-size: 16px;
   cursor: pointer;
 }
+
+/* The sign-in option in the login form. */
 .signInOption {
   font-weight: 400;
   font-size: 14px;
@@ -88,6 +117,8 @@ body {
   margin: 18px;
   color: var(--black);
 }
+
+/* The sign-up option in the login form. */
 .signupOption {
   font-weight: 400;
   font-size: 14px;
@@ -98,19 +129,36 @@ body {
 .blue {
   color: var(--primary);
   cursor: pointer;
+  text-decoration: none;
 }
 
+
+
+/* The following CSS styles apply when the maximum width of the screen is 1536px or less */
 @media (max-width: 1536px) {
+  /* Decrease the height of the header and add some margin at the bottom */
   .header {
     height: 58px;
     margin-bottom: 46px;
   }
-  .logo {
-    margin: 14px;
+  
+  /* Make the auth logo a flex element so it aligns with other elements */
+  .auth-logo-div{
+    display: inline-flex;
   }
+  
+  /* Limit the max-width and max-height of the auth logo */
+  .auth-logo{
+    max-width: 74px;
+    max-height: 32px;
+  }
+  
+  /* Increase the gap between rows in the form */
   .form {
     row-gap: 20px;
   }
+  
+  /* Limit the width, height, and add some margin and border to the input fields */
   .inputField {
     width: 300px;
     height: 35px;
@@ -118,16 +166,22 @@ body {
     border: 1.75px solid var(--grey);
     border-radius: 5px;
   }
+  
+  /* Change the font style of the input placeholder */
   ::placeholder {
     font-weight: 500;
     font-size: 13px;
   }
+  
+  /* Adjust the margin and font style of the forget password link */
   .forgetPassword {
     font-weight: 400;
     font-size: 11px;
     margin-right: 32px;
     margin-top: 4px;
   }
+  
+  /* Limit the width, height, border radius and font style of the input field button */
   .inputFieldButton {
     width: 302px;
     height: 38px;
@@ -136,6 +190,8 @@ body {
     font-weight: 600;
     font-size: 14px;
   }
+  
+  /* Limit the width, height, column gap, margin, border radius, and font style of the Google auth button */
   .googleAuth {
     column-gap: 11px;
     border: 1.75px solid var(--primary);
@@ -147,23 +203,37 @@ body {
     font-weight: 500;
     font-size: 14px;
   }
+  
+  /* Limit the width and height of the Google icon */
+  .google-icon{
+    width: 24px;
+    height: 24px;
+  }
+  
+  /* Adjust the font size and margin of the sign in option link */
   .signInOption {
     font-size: 11px;
     margin: 14px;
   }
+  
+  /* Adjust the font size and margin of the sign up option link */
   .signupOption {
     font-size: 11px;
     margin: 14px;
   }
 }
 
+/* The following CSS styles apply when the maximum width of the screen is 1280px or less */
+/* Similar to above */
+
 @media (max-width: 1280px) {
   .header {
     height: 49px;
     margin-bottom: 39px;
   }
-  .logo {
-    margin: 12px;
+  .auth-logo {
+    width: 61px;
+    height: 27px;
   }
   .form {
     row-gap: 17px;
@@ -203,6 +273,10 @@ body {
     margin: 0px 30px 0px 30px;
     font-weight: 500;
     font-size: 12px;
+  }
+  .google-icon{
+    width: 20px;
+    height: 20px;
   }
   .signInOption {
     font-size: 9px;

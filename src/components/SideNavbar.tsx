@@ -19,27 +19,28 @@ const SideNavbar = (props: SideNavbarProps) => {
   return (
     <div>
       <div className="bar" onClick={showSideBar}>
-        <img className="sidebar" src={Sidebar} alt="=" />
+        <img className="sidebar-sidenav" src={Sidebar} alt="=" />
       </div>
       <div className={sideBar ? "navMenuActive" : "navMenu"}>
         <div className="container-navbar">
           <div className="logo-section">
             <div>
-              <img src={Logo} alt="erp" />
+              <img src={Logo} alt="erp" className="navbar-logo" />
             </div>
             <div className="close-sidebar">
               <img
                 src={CloseSidebar}
                 alt="close-sidebar"
+                className="close-sidebar"
                 onClick={showSideBar}
               />
             </div>
           </div>
-          <div className="list">
-            <Link to="/dashboard" className="title">
+          <div className="side-nav-list">
+            <Link to="/dashboard" className="side-nav-title">
               Dashboard
             </Link>
-            <Link to="/Admin" className="title">
+            <Link to="/dashboard" className="side-nav-title">
               Administration
             </Link>
           </div>
