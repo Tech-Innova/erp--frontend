@@ -4,11 +4,10 @@ import "./styles/DashboardHeader.css";
 import Help from "../assets/icons/help-circle.png";
 import Bell from "../assets/icons/bell.png";
 import DefaultDp from "../assets/images/def-dp.png";
-import { useSidebarStore } from "../store";
+import { useUIStore } from "../uiStore";
 
 const DashboardHeader = () => {
-  
-  const {sidebarOpen} = useSidebarStore();
+  const { sidebarOpen } = useUIStore();
 
   return (
     <div className="root-dash-header">

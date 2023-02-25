@@ -1,10 +1,10 @@
 import "./styles/Admin.css";
-import { useSidebarStore } from "../store";
+import { useUIStore } from "../uiStore";
 import Bin from "../assets/icons/bin.png";
 import { useState } from "react";
 
 const Admin = () => {
-  const { sidebarOpen } = useSidebarStore();
+  const { sidebarOpen } = useUIStore();
 
   const [isActive, setIsActive] = useState(true);
 
