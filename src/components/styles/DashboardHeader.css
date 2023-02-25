@@ -1,23 +1,33 @@
+/* Import the App.css stylesheet */
 @import "../../App.css";
 
+/* Style the root element of the dashboard header */
 .root-dash-header {
   border-bottom: 1px solid var(--grey);
 }
+
+/* Style the container for the dashboard header */
 .dash-header {
   margin: 25px 40px;
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
+
+/* Style the left side of the dashboard header */
 .dash-header-left {
   display: flex;
 }
+
+/* Style the title of the dashboard header */
 .dash-header-title {
   margin-left: 40px;
   font-weight: 600;
   font-size: 25px;
   color: var(--black);
 }
+
+/* Style the expanded version of the dashboard header title */
 .dash-header-title-expand {
   margin-left: 270px;
   font-size: 25px;
@@ -25,38 +35,53 @@
   font-weight: 600;
   transition: 350ms;
 }
+
+/* Style the right side of the dashboard header */
 .dash-header-right {
   display: flex;
   justify-content: center;
   align-items: center;
 }
+
+/* Style the search bar in the dashboard header */
 .dash-header-search {
   width: 295px;
   height: 33px;
   border-radius: 7px;
   border: 1px solid var(--grey);
 }
+
+/* Style the placeholder text in the search bar */
 ::placeholder {
   font-weight: 400;
   font-size: 12px;
 }
+
+/* Style the help icon in the dashboard header */
 .dash-header-help {
   margin-left: 35px;
 }
+
+/* Style the notifications icon in the dashboard header */
 .dash-header-noti {
   margin-left: 35px;
 }
+
+/* Style the user profile section of the dashboard header */
 .dash-header-user {
   display: flex;
   column-gap: 8px;
   margin-left: 35px;
 }
+
+/* Style the username in the user profile section */
 .dash-header-username {
   color: var(--black);
   font-weight: 600;
   font-size: 14px;
 }
 
+/* Media query for screens with a maximum width of 1536px */
 @media (max-width: 1536px) {
   .dash-header {
     margin: 20px 32px;
@@ -116,6 +141,7 @@
   }
 }
 
+/* Media query for screens with a maximum width of 1280px */
 @media (max-width: 1280px) {
   .dash-header {
     margin: 17px 30px;

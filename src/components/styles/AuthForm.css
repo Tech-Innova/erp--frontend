@@ -132,8 +132,6 @@ body {
   text-decoration: none;
 }
 
-
-
 /* The following CSS styles apply when the maximum width of the screen is 1536px or less */
 @media (max-width: 1536px) {
   /* Decrease the height of the header and add some margin at the bottom */
@@ -141,23 +139,23 @@ body {
     height: 58px;
     margin-bottom: 46px;
   }
-  
+
   /* Make the auth logo a flex element so it aligns with other elements */
-  .auth-logo-div{
+  .auth-logo-div {
     display: inline-flex;
   }
-  
+
   /* Limit the max-width and max-height of the auth logo */
-  .auth-logo{
+  .auth-logo {
     max-width: 74px;
     max-height: 32px;
   }
-  
+
   /* Increase the gap between rows in the form */
   .form {
     row-gap: 20px;
   }
-  
+
   /* Limit the width, height, and add some margin and border to the input fields */
   .inputField {
     width: 300px;
@@ -166,13 +164,13 @@ body {
     border: 1.75px solid var(--grey);
     border-radius: 5px;
   }
-  
+
   /* Change the font style of the input placeholder */
   ::placeholder {
     font-weight: 500;
     font-size: 13px;
   }
-  
+
   /* Adjust the margin and font style of the forget password link */
   .forgetPassword {
     font-weight: 400;
@@ -180,7 +178,7 @@ body {
     margin-right: 32px;
     margin-top: 4px;
   }
-  
+
   /* Limit the width, height, border radius and font style of the input field button */
   .inputFieldButton {
     width: 302px;
@@ -190,7 +188,7 @@ body {
     font-weight: 600;
     font-size: 14px;
   }
-  
+
   /* Limit the width, height, column gap, margin, border radius, and font style of the Google auth button */
   .googleAuth {
     column-gap: 11px;
@@ -203,19 +201,19 @@ body {
     font-weight: 500;
     font-size: 14px;
   }
-  
+
   /* Limit the width and height of the Google icon */
-  .google-icon{
+  .google-icon {
     width: 24px;
     height: 24px;
   }
-  
+
   /* Adjust the font size and margin of the sign in option link */
   .signInOption {
     font-size: 11px;
     margin: 14px;
   }
-  
+
   /* Adjust the font size and margin of the sign up option link */
   .signupOption {
     font-size: 11px;
@@ -274,7 +272,7 @@ body {
     font-weight: 500;
     font-size: 12px;
   }
-  .google-icon{
+  .google-icon {
     width: 20px;
     height: 20px;
   }

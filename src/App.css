@@ -1,8 +1,9 @@
-:root{
-  --primary: #001BAA;
-  --secondary: #00051F;
-  --white: #FFFFFF;
+/* Define CSS variables using the :root pseudo-class */
+:root {
+  --primary: #001baa;
+  --secondary: #00051f;
+  --white: #ffffff;
   --black: #000000;
-  --grey: #CBCBCB;
-  --grey-dark: #9B9B9B;
+  --grey: #cbcbcb;
+  --grey-dark: #9b9b9b;
 }

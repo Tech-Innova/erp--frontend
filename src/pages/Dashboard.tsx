@@ -1,13 +1,15 @@
-import React from 'react'
-import SideNavbar from '../components/SideNavbar'
-import DashboardHeader from '../components/DashboardHeader'
+import SideNavbar from "../components/SideNavbar";
+import DashboardHeader from "../components/DashboardHeader";
+import { Outlet, Route, Routes } from "react-router-dom";
+import Admin from "../components/Admin";
 
 const Dashboard = () => {
   return (
-    <div >
+    <div>
       <DashboardHeader />
+      <Outlet />
     </div>
-  )
-}
+  );
+};
 
-export default Dashboard
+export default Dashboard;
