@@ -17,15 +17,34 @@
 /* This class contains the header for the users list */
 .admin-users-header {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  column-gap: 40px;
 }
 
 /* This class contains the title for the users list */
-.admin-users-header-title {
+.admin-users-header-title-active {
   font-weight: 600;
   font-size: 15px;
   color: var(--black);
   cursor: pointer;
+  border-bottom: 1px solid var(--black);
+}
+
+/* This class contains the title for the users list when inactive */
+.admin-users-header-title {
+  color: var(--grey-dark);
+  cursor: pointer;
+}
+.admin-users-header-title-inactive {
+  color: var(--grey-dark);
+  cursor: pointer;
+}
+.admin-users-header-title-active-inactive {
+  font-weight: 600;
+  font-size: 15px;
+  color: var(--black);
+  cursor: pointer;
+  border-bottom: 1px solid var(--black);
 }
 
 /* This class contains the bar for the users list */
@@ -80,6 +99,8 @@
   justify-content: space-between;
   margin: 25px;
   color: var(--grey-dark);
+  font-weight: 500;
+  font-size: 15px;
 }
 
 /* This class contains the title and status of a user in the users list */
@@ -128,8 +149,25 @@
   }
 
   .admin-users-header-title {
+    color: var(--grey-dark);
+    cursor: pointer;
     font-size: 12px;
   }
+  .admin-users-header-title-active{
+    font-size: 12px;
+    color: var(--black);
+  }
+  .admin-users-header-title-inactive {
+    color: var(--grey-dark);
+    cursor: pointer;
+    font-size: 12px;
+  }
+  .admin-users-header-title-active-inactive {
+    color: var(--black);
+    cursor: pointer;
+    font-size: 12px;
+  }
+  
   .admin-users-header-bar {
     margin-right: 24px;
   }
@@ -144,6 +182,7 @@
   }
   .admin-user-details {
     margin: 20px;
+    font-size: 12px;
   }
   .admin-users-list-title-status {
     width: 120px;
@@ -154,6 +193,10 @@
     height: 24px;
     border-radius: 3px;
     font-size: 11px;
+  }
+  .admin-users-list-delete{
+    width: 19px;
+    height: 19px;
   }
 }
 
@@ -170,6 +213,22 @@
   }
 
   .admin-users-header-title {
+    color: var(--grey-dark);
+    cursor: pointer;
+    font-size: 10px;
+  }
+  .admin-users-header-title-active{
+    font-size: 10px;
+    color: var(--black);
+  }
+  .admin-users-header-title-inactive {
+    color: var(--grey-dark);
+    cursor: pointer;
+    font-size: 10px;
+  }
+  .admin-users-header-title-active-inactive {
+    color: var(--black);
+    cursor: pointer;
     font-size: 10px;
   }
   .admin-users-header-bar {
@@ -186,6 +245,7 @@
   }
   .admin-user-details {
     margin: 17px;
+    font-size: 10px;
   }
   .admin-users-list-title-status {
     width: 100px;
@@ -196,5 +256,9 @@
     height: 20px;
     border-radius: 3px;
     font-size: 9px;
+  }
+  .admin-users-list-delete{
+    width: 16px;
+    height: 16px;
   }
 }
