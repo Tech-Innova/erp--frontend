@@ -3,25 +3,24 @@ import "./styles/SideNavbar.css";
 import Sidebar from "../assets/icons/sidebar.png";
 import CloseSidebar from "../assets/icons/closeSidebar.png";
 import Logo from "../assets/images/logo.png";
-import { Link } from "react-router-dom";
+import { Link} from "react-router-dom";
+import { useSidebarStore } from '../store'
 
-interface SideNavbarProps {
-  onDataChange: (newData: boolean) => void;
-}
+const SideNavbar = () => {
 
-const SideNavbar = (props: SideNavbarProps) => {
-  const [sideBar, setSideBar] = useState(false);
+  const { sidebarOpen, setSidebarOpen } = useSidebarStore();
 
-  const showSideBar = () => {
-    setSideBar(!sideBar);
-    props.onDataChange(sideBar);
+  const handleSidebarToggle = () => {
+    setSidebarOpen(!sidebarOpen);
+    console.log(sidebarOpen)
   };
+
   return (
     <div>
-      <div className="bar" onClick={showSideBar}>
+      <div className="bar" onClick={handleSidebarToggle}>
         <img className="sidebar-sidenav" src={Sidebar} alt="=" />
       </div>
-      <div className={sideBar ? "navMenuActive" : "navMenu"}>
+      <div className={sidebarOpen ? "navMenuActive" : "navMenu"}>
         <div className="container-navbar">
           <div className="logo-section">
             <div>
@@ -32,7 +31,7 @@ const SideNavbar = (props: SideNavbarProps) => {
                 src={CloseSidebar}
                 alt="close-sidebar"
                 className="close-sidebar"
-                onClick={showSideBar}
+                onClick={handleSidebarToggle}
               />
             </div>
           </div>
@@ -40,7 +39,7 @@ const SideNavbar = (props: SideNavbarProps) => {
             <Link to="/dashboard" className="side-nav-title">
               Dashboard
             </Link>
-            <Link to="/dashboard" className="side-nav-title">
+            <Link to="/dashboard/admin" className="side-nav-title">
               Administration
             </Link>
           </div>
