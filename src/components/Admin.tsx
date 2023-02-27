@@ -3,7 +3,11 @@ import { useUIStore } from "../uiStore";
 import Bin from "../assets/icons/bin.png";
 import { useState } from "react";
 import { useQuery } from "react-query";
-import { api_listUsers } from "../api/users";
+import {
+  api_listUsers,
+  api_modifyUserPrivilege,
+  api_modifyUserVerificationStatus,
+} from "../api/users";
 import { TUserAuthModel } from "@super_raptor911/erp-types";
 
 const Admin = () => {
@@ -17,8 +21,6 @@ const Admin = () => {
     setIsActive(false);
   };
 
-  const { isLoading, error, data } = useQuery("user_list", api_listUsers);
-
   return (
     <div className={sidebarOpen ? "root-admin-expand" : "root-admin"}>
       <div className="admin-users-container">
@@ -31,7 +33,6 @@ const Admin = () => {
                 : "admin-users-header-title"
             }
           >
-            {" "}
             Members
           </div>
           <div
@@ -54,37 +55,80 @@ const Admin = () => {
   );
 };
 
-const MemberRow = (user: TUserAuthModel) => {
-  return (
-    <div className="admin-users-details">
-            <div className="admin-users-end-bar"></div>
-            <div className="admin-user-details">
-              <div className="admin-users-list-title"> johnlee</div>
-              <div className="admin-users-list-title">johnlee@gmail.com</div>
-              <div className="admin-users-list-title"> John Lee</div>
-              <div className="admin-users-list-title-status">
-                <select className="admin-users-list-status-button">
-                  <option value="">Staff</option>
-                  <option value="Admin">Admin</option>
-                  <option value="Admin">Super Admin</option>
-                </select>
-
-                {/* <img
-                  src={Bin}
-                  alt="delete"
-                  className="admin-users-list-delete"
-                /> */}
-              </div>
-              <select className="admin-users-list-status-button">
-                <option value="">Active</option>
-                <option value="Admin">Inactive</option>
-              </select>
-            </div>
-          </div>
-  )
+interface IMemberRowProps {
+  user: TUserAuthModel;
+  refetch: () => any;
 }
 
+const MemberRow = ({ user, refetch }: IMemberRowProps) => {
+  const handleAccessLevelChange = async (value: string) => {
+    try {
+      const result = await api_modifyUserPrivilege({
+        user_id: user.id,
+        value: parseInt(value),
+      });
+
+      if (!result) throw "Something went wrong";
+      refetch();
+    } catch (e) {
+      console.error("error::handleAccessLevelChange", e);
+    }
+  };
+
+  const handleVerificationChange = async (value: string) => {
+    try {
+      const result = await api_modifyUserVerificationStatus({
+        user_id: user.id,
+        value: value === "1",
+      });
+
+      if (!result) throw "Something went wrong";
+      refetch();
+    } catch (e) {
+      console.error("error::handleAccessLevelChange", e);
+    }
+  };
+
+  return (
+    <div className="admin-users-details">
+      <div className="admin-users-end-bar"></div>
+      <div className="admin-user-details">
+        <div className="admin-users-list-title"> {user.username}</div>
+        <div className="admin-users-list-title">{user.email}</div>
+        <div className="admin-users-list-title"> {user.name}</div>
+        <div className="admin-users-list-title-status">
+          <select
+            className="admin-users-list-status-button"
+            value={user.access_level}
+            onChange={(e) => handleAccessLevelChange(e.target.value)}
+          >
+            <option value="2">Staff</option>
+            <option value="1">Admin</option>
+            <option value="0">Super Admin</option>
+          </select>
+        </div>
+        <select
+          className="admin-users-list-status-button"
+          value={user.is_verified ? 1 : 0}
+          onChange={(e) => handleVerificationChange(e.target.value)}
+        >
+          <option value="1">Active</option>
+          <option value="0">Inactive</option>
+        </select>
+      </div>
+    </div>
+  );
+};
+
 const ActiveMembers = () => {
+  const { isLoading, error, data, refetch } = useQuery(
+    "user_list",
+    api_listUsers
+  );
+  if (isLoading) return <div>Loading...</div>;
+
+  const activeMembers = data?.filter((user) => user.is_verified);
+
   return (
     <div className="admin-users-list-container">
       <div className="admin-users-list-view">
@@ -99,8 +143,9 @@ const ActiveMembers = () => {
           <div className="admin-users-list-header-bar"></div>
         </div>
         <div className="admin-users-list">
-          {/* User list to map */}
-          <MemberRow email="vyshnav" name="Vyshnav" username = "vysh" password = "1234" id= {20} is_verified = {true} access_level={2} created_by="13554"/>
+          {activeMembers?.map((member) => (
+            <MemberRow user={member} refetch={refetch} key={member.id} />
+          ))}
           {/* end of user list to map*/}
         </div>
       </div>
@@ -109,6 +154,14 @@ const ActiveMembers = () => {
 };
 
 const InactiveMembers = () => {
+  const { isLoading, error, data, refetch } = useQuery(
+    "user_list",
+    api_listUsers
+  );
+  if (isLoading) return <div>Loading...</div>;
+
+  const inActiveMembers = data?.filter((user) => !user.is_verified);
+
   return (
     <div className="admin-inactive-list-container">
       {/*  container for members/staffs*/}
@@ -124,9 +177,9 @@ const InactiveMembers = () => {
             <div className="admin-users-list-header-bar"></div>
           </div>
           <div className="admin-users-list">
-            {/* User list to map */}
-            <MemberRow email="vyshnav" name="Vyshnav" username = "vysh" password = "1234" id= {20} is_verified = {true} access_level={2} created_by="13554"/>
-            {/* end of user list to map*/}
+            {inActiveMembers?.map((member) => (
+              <MemberRow user={member} refetch={refetch} key={member.id} />
+            ))}
           </div>
         </div>
       </div>

@@ -12,11 +12,11 @@ const roles = ["Super Admin", "Admin", "Staff"];
 const DashboardHeader = () => {
   const { sidebarOpen } = useUIStore();
   const user = useMainStore((state) => state.user);
-  const [logActive, setLogActive] = useState(false)
+  const [logActive, setLogActive] = useState(false);
 
-  const handleLogout = () =>{
-    setLogActive(!logActive)
-  }
+  const handleLogout = () => {
+    setLogActive(!logActive);
+  };
   return (
     <div className="root-dash-header">
       <div className="dash-header">
@@ -44,17 +44,21 @@ const DashboardHeader = () => {
             <img src={Help} alt="h" className="dash-header-help" />
           </div>
           <div className="dash-header-noti-sec">
-            
             <img src={Bell} alt="n" className="dash-header-noti" />
           </div>
 
           <div className="dash-header-user" onClick={handleLogout}>
-          <div className={logActive ? "dash-header-user-logout":"dash-header-user-logout-active"}>
-            <LogoutHeader />
-          </div>
-          <img src={DefaultDp} alt="dp" className="dash-header-dp" />
-          
-            
+            <div
+              className={
+                logActive
+                  ? "dash-header-user-logout-active"
+                  : "dash-header-user-logout"
+              }
+            >
+              <LogoutHeader />
+            </div>
+            <img src={DefaultDp} alt="dp" className="dash-header-dp" />
+
             <div>
               <div className="dash-header-username">{user?.username} </div>
               <div className="dash-header-position">

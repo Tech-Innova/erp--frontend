@@ -1,15 +1,24 @@
-import React from 'react'
+import React from "react";
+import { useNavigate } from "react-router-dom";
+import { useMainStore } from "../store";
 
 const LogoutHeader = () => {
-  return (
-    <div className='logout-header-root'>
-        <div className='logout-header-box'>
-            <div className="logout-header-title">
-                Log Out
-            </div>
-        </div>
-    </div>
-  )
-}
+  const navigate = useNavigate();
+  const handleLogout = async () => {
+    useMainStore.getState().setIsSignedIn(null);
+    useMainStore.getState().setJwtToken("");
+    navigate("/");
+  };
 
-export default LogoutHeader
+  return (
+    <div className="logout-header-root">
+      <div className="logout-header-box">
+        <div className="logout-header-title" onClick={handleLogout}>
+          Log Out
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default LogoutHeader;
