@@ -1,9 +1,35 @@
 import "./styles/AuthForm.css";
 import Logo from "../assets/images/logo.png";
 import GoogleIcon from "../assets/icons/googleIcon.png";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useState } from "react";
+import Input from "./ui/Input";
+import { TUserSignupRequest } from "@super_raptor911/erp-types";
+
+import { api_signupUser } from "../api/users";
 
 const SignUpForm = () => {
+  const [name, setName] = useState("");
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("");
+  const nav = useNavigate();
+
+  const handleSubmit = async (e: any) => {
+    e.preventDefault();
+    const user: TUserSignupRequest = {
+      name,
+      username,
+      email,
+      password,
+      createdBy: username,
+    };
+    const result = await api_signupUser(user);
+    if (result) {
+      nav("/login");
+    }
+  };
+
   return (
     <div className="root">
       <div className="container">
@@ -13,32 +39,50 @@ const SignUpForm = () => {
           </Link>
         </div>
         <div className="formSec">
-          <form className="form">
-            <input
+          <form className="form" onSubmit={handleSubmit}>
+            <Input
               type="text"
               placeholder="Full Name"
               className="inputField"
-            ></input>
-            <input
+              value={name}
+              onChange={setName}
+              required
+            />
+            <Input
               type="text"
               placeholder="Email"
               className="inputField"
-            ></input>
-            <input
+              value={email}
+              onChange={setEmail}
+              required
+            />
+
+            <Input
               type="text"
               placeholder="Username"
               className="inputField"
-            ></input>
-            <input
+              value={username}
+              onChange={setUsername}
+              required
+            />
+
+            <Input
               type="password"
               placeholder="Password"
               className="inputField"
-            ></input>
-            <input
+              value={password}
+              onChange={setPassword}
+              required
+            />
+            <Input
               type="password"
               placeholder="Confirm Password"
               className="inputField"
-            ></input>
+              value={password}
+              onChange={setPassword}
+              required
+            />
+
             <input
               type="submit"
               value="Sign Up"
