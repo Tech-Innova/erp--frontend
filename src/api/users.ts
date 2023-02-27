@@ -1,6 +1,8 @@
 import {
   TUserAuthModel,
   TUserLoginRequest,
+  TUserSetPrivilegeRequest,
+  TUserSetVerificationRequest,
   TUserSignupRequest,
 } from "@super_raptor911/erp-types";
 import { useMainStore } from "../store";
@@ -51,6 +53,48 @@ export const api_listUsers = async () => {
     return (await getJson(res)) as TUserAuthModel[];
   } catch (error) {
     console.error("users::api_loginUser ", error);
+    alert(error);
+    throw error;
+  }
+};
+
+export const api_modifyUserVerificationStatus = async (
+  req: TUserSetVerificationRequest
+) => {
+  try {
+    const jwt_token = useMainStore.getState().jwtToken;
+    const res = await postRequest(
+      server + "user/modify_verification",
+      req,
+      jwt_token
+    );
+    if (res.status != 200) {
+      throw (await getJson(res)).message;
+    }
+    return true;
+  } catch (error) {
+    console.error("users::api_modifyUserVerificationStatus ", error);
+    alert(error);
+    throw error;
+  }
+};
+
+export const api_modifyUserPrivilege = async (
+  req: TUserSetPrivilegeRequest
+) => {
+  try {
+    const jwt_token = useMainStore.getState().jwtToken;
+    const res = await postRequest(
+      server + "user/modify_privilage",
+      req,
+      jwt_token
+    );
+    if (res.status != 200) {
+      throw (await getJson(res)).message;
+    }
+    return true;
+  } catch (error) {
+    console.error("users::api_modifyUserVerificationStatus ", error);
     alert(error);
     throw error;
   }
