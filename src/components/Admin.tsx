@@ -60,6 +60,7 @@ const ActiveMembers = () => {
             <div className="admin-users-list-header"> Email Address</div>
             <div className="admin-users-list-header"> Full Name</div>
             <div className="admin-users-list-header"> Permission Status</div>
+            <div className="admin-users-list-header"> Verification Status</div>
           </div>
           <div className="admin-users-list-header-bar"></div>
         </div>
@@ -75,13 +76,19 @@ const ActiveMembers = () => {
                 <select className="admin-users-list-status-button">
                   <option value="">Staff</option>
                   <option value="Admin">Admin</option>
+                  <option value="Admin">Super Admin</option>
                 </select>
-                <img
+                
+                {/* <img
                   src={Bin}
                   alt="delete"
                   className="admin-users-list-delete"
-                />
+                /> */}
               </div>
+              <select className="admin-users-list-status-button">
+                  <option value="">Active</option>
+                  <option value="Admin">Inactive</option>
+                </select>
             </div>
           </div>
           {/* end of user list to map*/}
