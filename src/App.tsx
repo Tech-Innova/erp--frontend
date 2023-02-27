@@ -3,20 +3,31 @@ import Login from "./pages/Login";
 import Home from "./pages/Home";
 import Signup from "./pages/Signup";
 import Dashboard from "./pages/Dashboard";
+import Admin from "./components/Admin";
+import { useMainStore } from "./store";
+import { QueryClient, QueryClientProvider } from "react-query";
 
+const queryClient = new QueryClient();
 
 function App() {
+  const user = useMainStore((state) => state.user);
   return (
-    <div className="App">
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Signup />} />
-          <Route path="/dashboard" element={<Dashboard />} />
-        </Routes>
-      </BrowserRouter>
-    </div>
+    <QueryClientProvider client={queryClient}>
+      <div className="App">
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Signup />} />
+            {user && (
+              <Route path="/dashboard" element={<Dashboard />}>
+                <Route path="admin" element={<Admin />}></Route>
+              </Route>
+            )}
+          </Routes>
+        </BrowserRouter>
+      </div>
+    </QueryClientProvider>
   );
 }
 

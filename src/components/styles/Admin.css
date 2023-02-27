@@ -1,0 +1,264 @@
+/* This is the main admin panel for the root element */
+@import "../../App.css";
+
+/* This class contains the main container for the admin panel */
+.root-admin {
+  margin: 30px 40px;
+}
+
+/* This class contains the expanded container for the admin panel */
+.root-admin-expand {
+  margin-top: 30px;
+  margin-right: 30px;
+  margin-left: 325px;
+  transition: 350ms;
+}
+
+/* This class contains the header for the users list */
+.admin-users-header {
+  display: flex;
+  flex-direction: row;
+  column-gap: 40px;
+}
+
+/* This class contains the title for the users list */
+.admin-users-header-title-active {
+  font-weight: 600;
+  font-size: 15px;
+  color: var(--black);
+  cursor: pointer;
+  border-bottom: 1px solid var(--black);
+}
+
+/* This class contains the title for the users list when inactive */
+.admin-users-header-title {
+  color: var(--grey-dark);
+  cursor: pointer;
+}
+.admin-users-header-title-inactive {
+  color: var(--grey-dark);
+  cursor: pointer;
+}
+.admin-users-header-title-active-inactive {
+  font-weight: 600;
+  font-size: 15px;
+  color: var(--black);
+  cursor: pointer;
+  border-bottom: 1px solid var(--black);
+}
+
+/* This class contains the bar for the users list */
+.admin-users-header-bar {
+  width: 100%;
+  margin-right: 30px;
+  height: 1px;
+  background-color: var(--grey);
+}
+
+/* This class contains the container for the users list */
+.admin-users-list-container {
+  width: 1200px;
+  border: 1px solid var(--grey);
+  margin-top: 50px;
+  border-radius: 10px;
+}
+
+/* This class contains the headers for the users list */
+.admin-users-list-headers {
+  display: flex;
+  flex-direction: column;
+}
+
+/* This class contains the title for the headers in the users list */
+.admin-users-list-headers-title {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: 25px;
+  font-weight: 600;
+  font-size: 15px;
+  color: var(--black);
+}
+
+/* This class contains the bar for the headers in the users list */
+.admin-users-list-header-bar {
+  width: 100%;
+  height: 1px;
+  background-color: var(--grey);
+}
+
+/* This class contains the list of users in the users list */
+.admin-users-list {
+  display: flex;
+  flex-direction: column;
+}
+
+/* This class contains the details of a user in the users list */
+.admin-user-details {
+  display: flex;
+  justify-content: space-between;
+  margin: 25px;
+  color: var(--grey-dark);
+  font-weight: 500;
+  font-size: 15px;
+}
+
+/* This class contains the title and status of a user in the users list */
+.admin-users-list-title-status {
+  width: 150px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* This class contains the status button for a user in the users list */
+.admin-users-list-status-button {
+  padding: 5px;
+  width: 112px;
+  height: 30px;
+  color: var(--white);
+  background-color: var(--secondary);
+  border: none;
+  border-radius: 4px;
+  font-weight: 500;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+/* This class contains the bar at the end of the users list */
+.admin-users-end-bar {
+  height: 1px;
+  background-color: var(--grey);
+}
+
+/* This class is used to delete a user in the users list */
+.admin-users-list-delete {
+  cursor: pointer;
+}
+
+/* The following CSS styles apply when the maximum width of the screen is 1536px or less */
+@media (max-width: 1536px) {
+  .root-admin {
+    margin: 24px 32px;
+  }
+  .root-admin-expand {
+    margin-top: 24px;
+    margin-right: 24px;
+    margin-left: 260px;
+    transition: 350ms;
+  }
+
+  .admin-users-header-title {
+    color: var(--grey-dark);
+    cursor: pointer;
+    font-size: 12px;
+  }
+  .admin-users-header-title-active{
+    font-size: 12px;
+    color: var(--black);
+  }
+  .admin-users-header-title-inactive {
+    color: var(--grey-dark);
+    cursor: pointer;
+    font-size: 12px;
+  }
+  .admin-users-header-title-active-inactive {
+    color: var(--black);
+    cursor: pointer;
+    font-size: 12px;
+  }
+  
+  .admin-users-header-bar {
+    margin-right: 24px;
+  }
+  .admin-users-list-container {
+    width: 960px;
+    margin-top: 40px;
+    border-radius: 8px;
+  }
+  .admin-users-list-headers-title {
+    margin: 20px;
+    font-size: 12px;
+  }
+  .admin-user-details {
+    margin: 20px;
+    font-size: 12px;
+  }
+  .admin-users-list-title-status {
+    width: 120px;
+  }
+  .admin-users-list-status-button {
+    padding: 4px;
+    width: 87px;
+    height: 24px;
+    border-radius: 3px;
+    font-size: 11px;
+  }
+  .admin-users-list-delete{
+    width: 19px;
+    height: 19px;
+  }
+}
+
+/* The following CSS styles apply when the maximum width of the screen is 1280px or less */
+@media (max-width: 1280px) {
+  .root-admin {
+    margin: 20px 27px;
+  }
+  .root-admin-expand {
+    margin-top: 20px;
+    margin-right: 20px;
+    margin-left: 217px;
+    transition: 350ms;
+  }
+
+  .admin-users-header-title {
+    color: var(--grey-dark);
+    cursor: pointer;
+    font-size: 10px;
+  }
+  .admin-users-header-title-active{
+    font-size: 10px;
+    color: var(--black);
+  }
+  .admin-users-header-title-inactive {
+    color: var(--grey-dark);
+    cursor: pointer;
+    font-size: 10px;
+  }
+  .admin-users-header-title-active-inactive {
+    color: var(--black);
+    cursor: pointer;
+    font-size: 10px;
+  }
+  .admin-users-header-bar {
+    margin-right: 20px;
+  }
+  .admin-users-list-container {
+    width: 800px;
+    margin-top: 33px;
+    border-radius: 7px;
+  }
+  .admin-users-list-headers-title {
+    margin: 17px;
+    font-size: 10px;
+  }
+  .admin-user-details {
+    margin: 17px;
+    font-size: 10px;
+  }
+  .admin-users-list-title-status {
+    width: 100px;
+  }
+  .admin-users-list-status-button {
+    padding: 3px;
+    width: 75px;
+    height: 20px;
+    border-radius: 3px;
+    font-size: 9px;
+  }
+  .admin-users-list-delete{
+    width: 16px;
+    height: 16px;
+  }
+}

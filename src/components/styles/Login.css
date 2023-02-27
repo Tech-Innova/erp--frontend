@@ -1,7 +1,12 @@
-.root{
-    background-color: #F0F1F6;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
+/*
+Styles for the root element, which sets the background color,
+centers its child elements vertically and horizontally
+and sets the height of the element to 100% of the viewport height.
+*/
+.root {
+  background-color: #f0f1f6;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
 }

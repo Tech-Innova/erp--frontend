@@ -1,41 +1,88 @@
 import "./styles/AuthForm.css";
 import Logo from "../assets/images/logo.png";
 import GoogleIcon from "../assets/icons/googleIcon.png";
+import { Link, useNavigate } from "react-router-dom";
+import { useState } from "react";
+import Input from "./ui/Input";
+import { TUserSignupRequest } from "@super_raptor911/erp-types";
+
+import { api_signupUser } from "../api/users";
 
 const SignUpForm = () => {
+  const [name, setName] = useState("");
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("");
+  const nav = useNavigate();
+
+  const handleSubmit = async (e: any) => {
+    e.preventDefault();
+    const user: TUserSignupRequest = {
+      name,
+      username,
+      email,
+      password,
+      createdBy: username,
+    };
+    const result = await api_signupUser(user);
+    if (result) {
+      nav("/login");
+    }
+  };
+
   return (
     <div className="root">
       <div className="container">
         <div className="header">
-          <img src={Logo} alt="logo" className="logo" />
+          <Link to="/">
+            <img src={Logo} alt="logo" className="auth-logo" />
+          </Link>
         </div>
         <div className="formSec">
-          <form className="form">
-          <input
+          <form className="form" onSubmit={handleSubmit}>
+            <Input
               type="text"
               placeholder="Full Name"
               className="inputField"
-            ></input>
-          <input
+              value={name}
+              onChange={setName}
+              required
+            />
+            <Input
               type="text"
               placeholder="Email"
               className="inputField"
-            ></input>
-            <input
+              value={email}
+              onChange={setEmail}
+              required
+            />
+
+            <Input
               type="text"
               placeholder="Username"
               className="inputField"
-            ></input>
-              <input
-                type="password"
-                placeholder="Password"
-                className="inputField"
-              ></input>
-              <input
-                type="password"
-                placeholder="Confirm Password"
-                className="inputField"
-              ></input>
+              value={username}
+              onChange={setUsername}
+              required
+            />
+
+            <Input
+              type="password"
+              placeholder="Password"
+              className="inputField"
+              value={password}
+              onChange={setPassword}
+              required
+            />
+            <Input
+              type="password"
+              placeholder="Confirm Password"
+              className="inputField"
+              value={password}
+              onChange={setPassword}
+              required
+            />
+
             <input
               type="submit"
               value="Sign Up"
@@ -44,16 +91,19 @@ const SignUpForm = () => {
           </form>
           <p>or</p>
           <button className="googleAuth">
-            <img src={GoogleIcon} alt="google-icon" />
+            <img src={GoogleIcon} alt="google-icon" className="google-icon" />
             <div>Continue with Google</div>
           </button>
           <div className="signInOption">
-            Already have an account ? <span className="blue">Sign In</span>
+            Already have an account ?{" "}
+            <Link to="/login" className="blue">
+              Sign In
+            </Link>
           </div>
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default SignUpForm
+export default SignUpForm;

@@ -1,9 +1,13 @@
+/* Import the App.css file */
 @import "../../App.css";
 
+/* Style for the burger menu icon */
 .bar {
   font-size: 40;
   cursor: pointer;
 }
+
+/* Style for the navigation menu */
 .navMenu {
   width: 300px;
   height: 100vh;
@@ -14,6 +18,7 @@
   overflow-y: hidden;
 }
 
+/* Style for the active navigation menu */
 .navMenuActive {
   top: 0;
   left: 0%;
@@ -24,44 +29,79 @@
   z-index: 1;
   position: fixed;
 }
+
+/* Style for the container navbar */
 .container-navbar {
   margin: 25px 30px;
   display: flex;
   flex-direction: column;
 }
+
+/* Style for the logo section */
 .logo-section {
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 90px;
 }
+
+/* Style for the close sidebar icon */
 .close-sidebar {
   cursor: pointer;
 }
-.list {
+
+/* Style for the side navigation list */
+.side-nav-list {
   font-weight: 600;
   font-size: 18px;
   color: var(--white);
   display: flex;
   flex-direction: column;
   row-gap: 40px;
+  justify-content: center;
 }
-.title {
+
+/* Style for the side navigation title */
+.side-nav-title {
   cursor: pointer;
   text-decoration: none;
   color: var(--white);
 }
 
+/* Style for the hover effect on the side navigation title */
+.side-nav-title:hover {
+  width: 220px;
+  height: 50px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding-left: 14px;
+  background-color: #1030d6;
+  border-radius: 10px;
+}
+
+/* Media query for screens with a maximum width of 1536px */
 @media (max-width: 1536px) {
   .bar {
     font-size: 32;
   }
+  .sidebar-sidenav {
+    width: 20px;
+    height: 20px;
+  }
   .navMenu {
     width: 240px;
   }
-
+  .navbar-logo {
+    width: 74px;
+    height: 32px;
+  }
   .navMenuActive {
     width: 240px;
+  }
+  .close-sidebar {
+    width: 20px;
+    height: 20px;
   }
   .container-navbar {
     margin: 20px 24px;
@@ -69,12 +109,19 @@
   .logo-section {
     margin-bottom: 72px;
   }
-  .list {
+  .side-nav-list {
     font-size: 14px;
     row-gap: 32px;
   }
+  .side-nav-title:hover {
+    width: 176px;
+    height: 40px;
+    padding-left: 11px;
+    border-radius: 8px;
+  }
 }
 
+/* Media query for screens with a maximum width of 1280px */
 @media (max-width: 1280px) {
   .bar {
     font-size: 30;
@@ -82,7 +129,18 @@
   .navMenu {
     width: 200px;
   }
-
+  .sidebar-sidenav {
+    width: 17px;
+    height: 17px;
+  }
+  .close-sidebar {
+    width: 17px;
+    height: 17px;
+  }
+  .navbar-logo {
+    width: 61px;
+    height: 27px;
+  }
   .navMenuActive {
     width: 200px;
   }
@@ -92,8 +150,14 @@
   .logo-section {
     margin-bottom: 60px;
   }
-  .list {
+  .side-nav-list {
     font-size: 12px;
     row-gap: 30px;
+  }
+  .side-nav-title:hover {
+    width: 147px;
+    height: 33px;
+    padding-left: 9px;
+    border-radius: 7px;
   }
 }
