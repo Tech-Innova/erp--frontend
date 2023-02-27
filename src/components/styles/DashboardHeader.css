@@ -81,6 +81,25 @@
   font-size: 14px;
 }
 
+.dash-header-user-logout{
+  display: none;
+}
+
+.dash-header-user-logout-active{
+  border: 1px solid var(--black);
+  z-index: 5;
+  position: fixed;
+  background-color: var(--white);
+  width: 80px;
+  cursor: pointer;
+  height: 40px;
+  font-size: 14px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 5px;
+}
+
 /* Media query for screens with a maximum width of 1536px */
 @media (max-width: 1536px) {
   .dash-header {
