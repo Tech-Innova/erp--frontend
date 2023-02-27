@@ -3,11 +3,11 @@ import {
   TUserLoginRequest,
   TUserSignupRequest,
 } from "@super_raptor911/erp-types";
+import { useMainStore } from "../store";
 import { postRequest, getJson, getRequest } from "./request";
 
 const server: string = import.meta.env.VITE_API_SERVER;
-console.log("server", server);
-//
+
 export const api_signupUser = async (userInfo: TUserSignupRequest) => {
   try {
     const res = await postRequest(server + "user/signup", userInfo);
@@ -29,18 +29,22 @@ export const api_loginUser = async (userInfo: TUserLoginRequest) => {
     if (res.status != 200) {
       throw (await getJson(res)).message;
     }
+    const data = await getJson(res);
+    useMainStore.getState().setJwtToken(data.token);
 
-    return true;
+    return data.user as TUserAuthModel;
   } catch (error) {
     console.error("users::api_loginUser ", error);
     alert(error);
+    return null;
   }
-  return false;
 };
 
 export const api_listUsers = async () => {
   try {
-    const res = await getRequest(server + "user/list");
+    const jwt_token = useMainStore.getState().jwtToken;
+    console.log("token = ", jwt_token);
+    const res = await getRequest(server + "user/list", jwt_token);
     if (res.status != 200) {
       throw (await getJson(res)).message;
     }
@@ -48,5 +52,6 @@ export const api_listUsers = async () => {
   } catch (error) {
     console.error("users::api_loginUser ", error);
     alert(error);
+    throw error;
   }
 };

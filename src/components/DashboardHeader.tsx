@@ -5,9 +5,12 @@ import Help from "../assets/icons/help-circle.png";
 import Bell from "../assets/icons/bell.png";
 import DefaultDp from "../assets/images/def-dp.png";
 import { useUIStore } from "../uiStore";
+import { useMainStore } from "../store";
 
+const roles = ["Super Admin", "Admin", "Staff"];
 const DashboardHeader = () => {
   const { sidebarOpen } = useUIStore();
+  const user = useMainStore((state) => state.user);
 
   return (
     <div className="root-dash-header">
@@ -42,8 +45,10 @@ const DashboardHeader = () => {
           <div className="dash-header-user">
             <img src={DefaultDp} alt="dp" className="dash-header-dp" />
             <div>
-              <div className="dash-header-username">Julian Wah </div>
-              <div className="dash-header-position">Sales Manager </div>
+              <div className="dash-header-username">{user?.username} </div>
+              <div className="dash-header-position">
+                {user && roles[user.access_level]}
+              </div>
             </div>
           </div>
         </div>

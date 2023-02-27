@@ -2,10 +2,12 @@ import "./styles/Admin.css";
 import { useUIStore } from "../uiStore";
 import Bin from "../assets/icons/bin.png";
 import { useState } from "react";
+import { useQuery } from "react-query";
+import { api_listUsers } from "../api/users";
+import { TUserAuthModel } from "@super_raptor911/erp-types";
 
 const Admin = () => {
   const { sidebarOpen } = useUIStore();
-
   const [isActive, setIsActive] = useState(true);
 
   const handleActiveView = () => {
@@ -14,6 +16,8 @@ const Admin = () => {
   const handleInactiveView = () => {
     setIsActive(false);
   };
+
+  const { isLoading, error, data } = useQuery("user_list", api_listUsers);
 
   return (
     <div className={sidebarOpen ? "root-admin-expand" : "root-admin"}>
@@ -78,7 +82,7 @@ const ActiveMembers = () => {
                   <option value="Admin">Admin</option>
                   <option value="Admin">Super Admin</option>
                 </select>
-                
+
                 {/* <img
                   src={Bin}
                   alt="delete"
@@ -86,9 +90,9 @@ const ActiveMembers = () => {
                 /> */}
               </div>
               <select className="admin-users-list-status-button">
-                  <option value="">Active</option>
-                  <option value="Admin">Inactive</option>
-                </select>
+                <option value="">Active</option>
+                <option value="Admin">Inactive</option>
+              </select>
             </div>
           </div>
           {/* end of user list to map*/}

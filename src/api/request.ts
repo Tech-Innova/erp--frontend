@@ -1,9 +1,10 @@
-export async function postRequest(url: string, data: any) {
+export async function postRequest(url: string, data: any, token?: string) {
   try {
     const response = await fetch(url, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
       },
       body: JSON.stringify(data),
     });
@@ -17,10 +18,14 @@ export async function postRequest(url: string, data: any) {
   }
 }
 
-export async function getRequest(url: string) {
+export async function getRequest(url: string, token?: string) {
   try {
     const response = await fetch(url, {
       method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
     });
 
     // const data = await response.json();
