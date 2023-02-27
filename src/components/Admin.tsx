@@ -54,23 +54,9 @@ const Admin = () => {
   );
 };
 
-const ActiveMembers = () => {
+const MemberRow = (user: TUserAuthModel) => {
   return (
-    <div className="admin-users-list-container">
-      <div className="admin-users-list-view">
-        <div className="admin-users-list-headers">
-          <div className="admin-users-list-headers-title">
-            <div className="admin-users-list-header"> Username</div>
-            <div className="admin-users-list-header"> Email Address</div>
-            <div className="admin-users-list-header"> Full Name</div>
-            <div className="admin-users-list-header"> Permission Status</div>
-            <div className="admin-users-list-header"> Verification Status</div>
-          </div>
-          <div className="admin-users-list-header-bar"></div>
-        </div>
-        <div className="admin-users-list">
-          {/* User list to map */}
-          <div className="admin-users-details">
+    <div className="admin-users-details">
             <div className="admin-users-end-bar"></div>
             <div className="admin-user-details">
               <div className="admin-users-list-title"> johnlee</div>
@@ -95,6 +81,26 @@ const ActiveMembers = () => {
               </select>
             </div>
           </div>
+  )
+}
+
+const ActiveMembers = () => {
+  return (
+    <div className="admin-users-list-container">
+      <div className="admin-users-list-view">
+        <div className="admin-users-list-headers">
+          <div className="admin-users-list-headers-title">
+            <div className="admin-users-list-header"> Username</div>
+            <div className="admin-users-list-header"> Email Address</div>
+            <div className="admin-users-list-header"> Full Name</div>
+            <div className="admin-users-list-header"> Permission Status</div>
+            <div className="admin-users-list-header"> Verification Status</div>
+          </div>
+          <div className="admin-users-list-header-bar"></div>
+        </div>
+        <div className="admin-users-list">
+          {/* User list to map */}
+          <MemberRow email="vyshnav" name="Vyshnav" username = "vysh" password = "1234" id= {20} is_verified = {true} access_level={2} created_by="13554"/>
           {/* end of user list to map*/}
         </div>
       </div>
@@ -119,24 +125,7 @@ const InactiveMembers = () => {
           </div>
           <div className="admin-users-list">
             {/* User list to map */}
-            <div className="admin-users-details">
-              <div className="admin-users-end-bar"></div>
-              <div className="admin-user-details">
-                <div className="admin-users-list-title"> johnlee</div>
-                <div className="admin-users-list-title">johnlee@gmail.com</div>
-                <div className="admin-users-list-title"> John Lee</div>
-                <div className="admin-users-list-title-status">
-                  <button className="admin-users-list-status-button">
-                    Activate
-                  </button>
-                  <img
-                    src={Bin}
-                    alt="delete"
-                    className="admin-users-list-delete"
-                  />
-                </div>
-              </div>
-            </div>
+            <MemberRow email="vyshnav" name="Vyshnav" username = "vysh" password = "1234" id= {20} is_verified = {true} access_level={2} created_by="13554"/>
             {/* end of user list to map*/}
           </div>
         </div>
