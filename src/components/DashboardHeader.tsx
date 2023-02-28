@@ -17,6 +17,7 @@ const DashboardHeader = () => {
   const handleLogout = () => {
     setLogActive(!logActive);
   };
+
   return (
     <div className="root-dash-header">
       <div className="dash-header">
@@ -47,17 +48,13 @@ const DashboardHeader = () => {
             <img src={Bell} alt="n" className="dash-header-noti" />
           </div>
 
-          <div className="dash-header-user" onClick={handleLogout}>
-            <div
-              className={
-                logActive
-                  ? "dash-header-user-logout-active"
-                  : "dash-header-user-logout"
-              }
-            >
-              <LogoutHeader />
-            </div>
-            <img src={DefaultDp} alt="dp" className="dash-header-dp" />
+          <div className="dash-header-user">
+            <img
+              src={DefaultDp}
+              alt="dp"
+              className="dash-header-dp"
+              onClick={handleLogout}
+            />
 
             <div>
               <div className="dash-header-username">{user?.username} </div>
@@ -66,6 +63,16 @@ const DashboardHeader = () => {
               </div>
             </div>
           </div>
+        </div>
+        <div
+          onClick={handleLogout}
+          className={
+            logActive
+              ? "dash-header-user-logout-active"
+              : "dash-header-user-logout"
+          }
+        >
+          <LogoutHeader />
         </div>
       </div>
     </div>
