@@ -1,0 +1,211 @@
+@import '../../App.css';
+
+.home-root{
+    
+}
+.home-container{
+    background-color: var(--primary);
+    color: var(--white);
+    padding: 40px 180px;   
+    height: 85vh;
+}
+.home-header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.home-header-left, .home-header-right{
+    display: flex;
+    column-gap: 35px;
+    justify-content: center;
+    align-items: center;
+}
+.home-header-title{
+    font-weight: 600;
+    font-size: 15px;
+    text-decoration: none;
+    color: var(--white);
+    cursor: pointer;
+}
+.home-header-title:hover{
+    border-bottom: 2px solid var(--white);
+}
+.home-header-button{
+    width: 140px;
+    height: 40px;
+    text-align: center;
+    background-color: var(--white);
+    color: var(--secondary);
+    font-size: 14px;
+    font-weight: 600;
+    border: none;
+    border-radius: 7px;
+    cursor: pointer;
+}
+.home-header-button:hover{
+    background-color: var(--secondary);
+    color: var(--white);
+}
+.home-body-container{
+    display: flex;
+    justify-content: space-between;
+}
+.home-body-container-left{
+    margin-top: 150px;
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+    max-width: 700px;
+}
+.home-body-title{
+    font-weight: 700;
+    font-size: 63px;
+    line-height: 70px;
+    margin-bottom: 20px;
+}
+.home-body-description{
+    font-weight: 500;
+    font-size: 23px;
+    margin-bottom: 40px;
+    color: var(--grey-dark);
+    line-height: 29px;
+    margin-bottom: 40px;
+}
+.home-body-buttons{
+    display: flex;
+    column-gap: 20px;
+}
+.home-body-getstarted{
+    width: 200px;
+    height: 60px;
+    text-align: center;
+    background-color: var(--white);
+    color: var(--secondary);
+    font-size: 18px;
+    font-weight: 600;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+}
+.home-body-getstarted:hover{
+    background-color: var(--secondary);
+    color: var(--white);
+}
+.home-body-contactus{
+    width: 200px;
+    height: 60px;
+    text-align: center;
+    background-color: var(--primary);
+    color: var(--white);
+    border: 2px solid var(--white);
+    font-size: 18px;
+    font-weight: 600;
+    border-radius: 10px;
+    cursor: pointer;
+}
+.home-body-image{
+    width: 755px;
+    height: 525px;
+    margin-top: 80px;
+}
+
+@media (max-width: 1536px){
+    .home-container{
+        padding: 32px 144px;   
+        height: 85vh;
+    }
+    .home-header-left, .home-header-right{
+        column-gap: 28px;
+    }
+    .home-header-title{
+        font-size: 12px;
+    }
+    .home-header-button{
+        width: 112px;
+        height: 32px;
+        font-size: 11px;
+        border-radius: 6px;
+    }
+    .home-body-container-left{
+        margin-top: 120px;
+        max-width: 560px;
+    }
+    .home-body-title{
+        font-size: 50px;
+        line-height: 56px;
+        margin-bottom: 16px;
+    }
+    .home-body-description{
+        font-size: 18px;
+        margin-bottom: 32px;
+        line-height: 23px;
+        margin-bottom: 32px;
+    }
+    .home-body-buttons{
+        column-gap: 16px;
+    }
+    .home-body-getstarted, .home-body-contactus{
+        width: 160px;
+        height: 48px;
+        font-size: 14px;
+        border-radius: 7px;
+    }
+    .home-body-image{
+        width: 620px;
+        height: 420px;
+        margin-top: 64px;
+    }
+} 
+
+
+@media (max-width: 1280px){
+    .home-container{
+        padding: 27px 120px;   
+        height: 85vh;
+    }
+    .home-header-left, .home-header-right{
+        column-gap: 23px;
+    }
+    .home-header-title{
+        font-size: 10px;
+    }
+    .home-header-title:hover{
+        border-bottom: 2px solid var(--white);
+    }
+    .home-header-button{
+        width: 93px;
+        height: 27px;
+        font-size: 10px;
+        border-radius: 5px;
+    }
+    .home-body-container-left{
+        margin-top: 100px;
+        max-width: 467px;
+    }
+    .home-body-title{
+        font-size: 42px;
+        line-height: 47px;
+        margin-bottom: 13px;
+    }
+    .home-body-description{
+        font-size: 15px;
+        margin-bottom: 27px;
+        line-height: 20px;
+        margin-bottom: 47px;
+    }
+    .home-body-buttons{
+        column-gap: 13px;
+    }
+    .home-body-getstarted, .home-body-contactus{
+        width: 133px;
+        height: 40px;
+        font-size: 12px;
+        border-radius: 7px;
+    }
+    
+    .home-body-image{
+        width: 503px;
+        height: 350px;
+        margin-top: 53px;
+    }
+} 
