@@ -99,3 +99,21 @@ export const api_modifyUserPrivilege = async (
     throw error;
   }
 };
+
+export const api_getGoogleUserDetails = async (accessToken: string) => {
+  try {
+    const res = await getRequest(
+      `https://www.googleapis.com/oauth2/v1/userinfo?access_token=${accessToken}`,
+      accessToken
+    );
+
+    if (res.status !== 200) throw "FAILED_TO_GET_GOOGLE_USER_DETAILS";
+
+    const userDetails = await getJson(res);
+    return userDetails;
+  } catch (error) {
+    console.error("users::api_modifyUserVerificationStatus ", error);
+    alert(error);
+    throw error;
+  }
+};
