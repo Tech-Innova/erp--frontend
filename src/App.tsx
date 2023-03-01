@@ -7,7 +7,7 @@ import Admin from "./components/Admin";
 import { useMainStore } from "./store";
 import { QueryClient, QueryClientProvider } from "react-query";
 import NotFound from "./pages/NotFound";
-import PermissionDenied from "./pages/PermissionDenied";
+import AuthLayout from "./components/AuthLayout";
 
 const queryClient = new QueryClient();
 
@@ -21,17 +21,14 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Signup />} />
-            {user ? (
+
+            <Route element={<AuthLayout />}>
               <Route path="/dashboard" element={<Dashboard />}>
                 <Route path="admin" element={<Admin />}></Route>
               </Route>
-            ) : (
-              <Route path="/dashboard" element={<Login />}>
-                <Route path="admin" element={<Login />}></Route>
-              </Route>
-            )}
-            <Route path="/404-error" element={<NotFound />} />
-            <Route path="/access-denied" element={<PermissionDenied />} />
+            </Route>
+
+            <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>
       </div>
