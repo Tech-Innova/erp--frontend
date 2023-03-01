@@ -1,6 +1,7 @@
 import {
   TUserAuthModel,
   TUserLoginRequest,
+  TUserOauthRequest,
   TUserSetPrivilegeRequest,
   TUserSetVerificationRequest,
   TUserSignupRequest,
@@ -45,7 +46,6 @@ export const api_loginUser = async (userInfo: TUserLoginRequest) => {
 export const api_listUsers = async () => {
   try {
     const jwt_token = useMainStore.getState().jwtToken;
-    console.log("token = ", jwt_token);
     const res = await getRequest(server + "user/list", jwt_token);
     if (res.status != 200) {
       throw (await getJson(res)).message;
@@ -115,5 +115,37 @@ export const api_getGoogleUserDetails = async (accessToken: string) => {
     console.error("users::api_modifyUserVerificationStatus ", error);
     alert(error);
     throw error;
+  }
+};
+
+export const api_signupUserOauth = async (userInfo: TUserOauthRequest) => {
+  try {
+    const res = await postRequest(server + "user/signup_oauth", userInfo);
+    if (res.status != 200) {
+      throw (await getJson(res)).message;
+    }
+
+    return true;
+  } catch (error) {
+    console.error("users::api_signupUserOauth ", error);
+    alert(error);
+  }
+  return false;
+};
+
+export const api_loginUserOauth = async (userInfo: TUserOauthRequest) => {
+  try {
+    const res = await postRequest(server + "user/login_oauth", userInfo);
+    if (res.status != 200) {
+      throw (await getJson(res)).message;
+    }
+    const data = await getJson(res);
+    useMainStore.getState().setJwtToken(data.token);
+
+    return data.user as TUserAuthModel;
+  } catch (error) {
+    console.error("users::api_loginUser ", error);
+    alert(error);
+    return null;
   }
 };
