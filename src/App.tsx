@@ -6,6 +6,8 @@ import Dashboard from "./pages/Dashboard";
 import Admin from "./components/Admin";
 import { useMainStore } from "./store";
 import { QueryClient, QueryClientProvider } from "react-query";
+import NotFound from "./pages/NotFound";
+import PermissionDenied from "./pages/PermissionDenied";
 
 const queryClient = new QueryClient();
 
@@ -24,6 +26,8 @@ function App() {
                 <Route path="admin" element={<Admin />}></Route>
               </Route>
             )}
+            <Route path="/404-error" element={<NotFound />} />
+            <Route path="/access-denied" element={<PermissionDenied />} />
           </Routes>
         </BrowserRouter>
       </div>
