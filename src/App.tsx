@@ -21,9 +21,13 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Signup />} />
-            {user && (
+            {user ? (
               <Route path="/dashboard" element={<Dashboard />}>
                 <Route path="admin" element={<Admin />}></Route>
+              </Route>
+            ) : (
+              <Route path="/dashboard" element={<Login />}>
+                <Route path="admin" element={<Login />}></Route>
               </Route>
             )}
             <Route path="/404-error" element={<NotFound />} />
