@@ -5,14 +5,20 @@ import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import Input from "./ui/Input";
 import { TUserLoginRequest } from "@super_raptor911/erp-types";
-import { api_loginUser } from "../api/users";
+import { api_loginUser, api_getGoogleUserDetails } from '../api/users';
 import { useMainStore } from "../store";
+import { useGoogleLogin } from "@react-oauth/google";
+
 
 const LoginForm = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const setSignedIn = useMainStore((state) => state.setIsSignedIn);
   const nav = useNavigate();
+
+  const login = useGoogleLogin({
+    onSuccess: (codeResponse) => api_getGoogleUserDetails(codeResponse.access_token).then(res => console.log(res)),
+  });
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
@@ -60,7 +66,7 @@ const LoginForm = () => {
             <input type="submit" value="Sign In" className="inputFieldButton" />
           </form>
           <p>or</p>
-          <button className="googleAuth">
+          <button className="googleAuth" onClick={() => login()}>
             <img src={GoogleIcon} alt="google-icon" className="google-icon" />
             <div>Continue with Google</div>
           </button>

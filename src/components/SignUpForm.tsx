@@ -6,7 +6,8 @@ import { useState } from "react";
 import Input from "./ui/Input";
 import { TUserSignupRequest } from "@super_raptor911/erp-types";
 
-import { api_signupUser } from "../api/users";
+import { api_getGoogleUserDetails, api_signupUser } from "../api/users";
+import { useGoogleLogin } from "@react-oauth/google";
 
 const SignUpForm = () => {
   const [name, setName] = useState("");
@@ -14,6 +15,10 @@ const SignUpForm = () => {
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
   const nav = useNavigate();
+
+  const signup = useGoogleLogin({
+    onSuccess: (codeResponse) => api_getGoogleUserDetails(codeResponse.access_token).then(res => console.log(res)),
+  });
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
@@ -90,7 +95,7 @@ const SignUpForm = () => {
             ></input>
           </form>
           <p>or</p>
-          <button className="googleAuth">
+          <button className="googleAuth" onClick={() => signup()} >
             <img src={GoogleIcon} alt="google-icon" className="google-icon" />
             <div>Continue with Google</div>
           </button>
