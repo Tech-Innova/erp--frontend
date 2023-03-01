@@ -4,11 +4,17 @@ import GoogleIcon from "../assets/icons/googleIcon.png";
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import Input from "./ui/Input";
-import { TUserLoginRequest } from "@super_raptor911/erp-types";
-import { api_loginUser, api_getGoogleUserDetails } from '../api/users';
+import {
+  TUserLoginRequest,
+  TUserOauthRequest,
+} from "@super_raptor911/erp-types";
+import {
+  api_loginUser,
+  api_getGoogleUserDetails,
+  api_loginUserOauth,
+} from "../api/users";
 import { useMainStore } from "../store";
 import { useGoogleLogin } from "@react-oauth/google";
-
 
 const LoginForm = () => {
   const [username, setUsername] = useState("");
@@ -17,8 +23,26 @@ const LoginForm = () => {
   const nav = useNavigate();
 
   const login = useGoogleLogin({
-    onSuccess: (codeResponse) => api_getGoogleUserDetails(codeResponse.access_token).then(res => console.log(res)),
+    onSuccess: (codeResponse) =>
+      api_getGoogleUserDetails(codeResponse.access_token).then((res) =>
+        handleGoogleLogin(res)
+      ),
   });
+
+  const handleGoogleLogin = async (cred: any) => {
+    const user: TUserOauthRequest = {
+      name: cred.name,
+      username: cred.given_name + "_" + cred.family_name,
+      email: cred.email,
+      provider: "google",
+      createdBy: cred.given_name + "_" + cred.family_name,
+    };
+    const result = await api_loginUserOauth(user);
+    if (result) {
+      setSignedIn(result);
+      nav("/dashboard");
+    }
+  };
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();

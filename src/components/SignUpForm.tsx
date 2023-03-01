@@ -4,9 +4,16 @@ import GoogleIcon from "../assets/icons/googleIcon.png";
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import Input from "./ui/Input";
-import { TUserSignupRequest } from "@super_raptor911/erp-types";
+import {
+  TUserOauthRequest,
+  TUserSignupRequest,
+} from "@super_raptor911/erp-types";
 
-import { api_getGoogleUserDetails, api_signupUser } from "../api/users";
+import {
+  api_getGoogleUserDetails,
+  api_signupUser,
+  api_signupUserOauth,
+} from "../api/users";
 import { useGoogleLogin } from "@react-oauth/google";
 
 const SignUpForm = () => {
@@ -17,8 +24,25 @@ const SignUpForm = () => {
   const nav = useNavigate();
 
   const signup = useGoogleLogin({
-    onSuccess: (codeResponse) => api_getGoogleUserDetails(codeResponse.access_token).then(res => console.log(res)),
+    onSuccess: (codeResponse) =>
+      api_getGoogleUserDetails(codeResponse.access_token).then((res) =>
+        handleGoogleLogin(res)
+      ),
   });
+
+  const handleGoogleLogin = async (cred: any) => {
+    const user: TUserOauthRequest = {
+      name: cred.name,
+      username: cred.given_name + "_" + cred.family_name,
+      email: cred.email,
+      provider: "google",
+      createdBy: cred.given_name + "_" + cred.family_name,
+    };
+    const result = await api_signupUserOauth(user);
+    if (result) {
+      nav("/login");
+    }
+  };
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
@@ -95,7 +119,7 @@ const SignUpForm = () => {
             ></input>
           </form>
           <p>or</p>
-          <button className="googleAuth" onClick={() => signup()} >
+          <button className="googleAuth" onClick={() => signup()}>
             <img src={GoogleIcon} alt="google-icon" className="google-icon" />
             <div>Continue with Google</div>
           </button>
