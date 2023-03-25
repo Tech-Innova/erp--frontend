@@ -1,7 +1,7 @@
 import "./styles/AuthForm.css";
 import Logo from "../assets/images/logo.png";
 import GoogleIcon from "../assets/icons/googleIcon.png";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, Outlet, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import Input from "./ui/Input";
 import {
@@ -15,6 +15,7 @@ import {
   api_signupUserOauth,
 } from "../api/users";
 import { useGoogleLogin } from "@react-oauth/google";
+import TwoFactorAuth from "./TwoFactorAuth";
 
 const SignUpForm = () => {
   const [name, setName] = useState("");
