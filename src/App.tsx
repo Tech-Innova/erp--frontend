@@ -8,6 +8,7 @@ import { useMainStore } from "./store";
 import { QueryClient, QueryClientProvider } from "react-query";
 import NotFound from "./pages/NotFound";
 import AuthLayout from "./components/AuthLayout";
+import TwoFactorAuth from "./components/TwoFactorAuth";
 
 const queryClient = new QueryClient();
 
@@ -21,6 +22,10 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Signup />} />
+            <Route
+              path="/two-factor-authentication"
+              element={<TwoFactorAuth />}
+            />
 
             <Route element={<AuthLayout />}>
               <Route path="/dashboard" element={<Dashboard />}>
