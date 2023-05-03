@@ -8,7 +8,7 @@ import { useMainStore } from "./store";
 import { QueryClient, QueryClientProvider } from "react-query";
 import NotFound from "./pages/NotFound";
 import AuthLayout from "./components/AuthLayout";
-import TwoFactorAuth from "./components/TwoFactorAuth";
+import { RoutePath } from "./constants";
 
 const queryClient = new QueryClient();
 
@@ -19,17 +19,16 @@ function App() {
       <div className="App">
         <BrowserRouter>
           <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/register" element={<Signup />} />
-            <Route
-              path="/two-factor-authentication"
-              element={<TwoFactorAuth />}
-            />
+            <Route path={RoutePath.HOME} element={<Home />} />
+            <Route path={RoutePath.LOGIN} element={<Login />} />
+            <Route path={RoutePath.LOGIN} element={<Signup />} />
 
             <Route element={<AuthLayout />}>
-              <Route path="/dashboard" element={<Dashboard />}>
-                <Route path="admin" element={<Admin />}></Route>
+              <Route path={RoutePath.DASHBOARD} element={<Dashboard />}>
+                <Route
+                  path={RoutePath.ADMIN_DASHBOARD}
+                  element={<Admin />}
+                ></Route>
               </Route>
             </Route>
 

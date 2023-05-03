@@ -54,6 +54,12 @@
     cursor: pointer;
 }
 
+.twofact-qrcode-opt{
+    font-size: 14px;
+    color: blue;
+    cursor: pointer;
+}
+
 .twofact-key{
     font-weight: 600;
 }

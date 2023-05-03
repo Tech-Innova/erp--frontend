@@ -4,6 +4,7 @@ import { useMainStore } from "../store";
 
 const AuthLayout = () => {
   const user = useMainStore((state) => state.user);
+  const twoFactor = useMainStore((state) => state.twoFactorAuth);
 
   if (user) {
     const isAuthenticated = user.is_verified;
