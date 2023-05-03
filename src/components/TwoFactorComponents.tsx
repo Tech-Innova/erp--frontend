@@ -1,47 +1,54 @@
 import BackArrowLong from "../assets/icons/back-arrow-long.png";
-import Lock from "../assets/icons/2fa-lock.png";
-import Mobile from "../assets/icons/2fa-mob.png";
 import Copy from "../assets/icons/copy-icon.png";
+import QRCode from "qrcode";
 import "./styles/TwoFactorAuth.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { T2fa } from "@super_raptor911/erp-types";
+import { api_save2fa, api_verify2fa } from "../api/users";
+import { useMainStore } from "../store";
+import { useNavigate } from "react-router-dom";
+import { RoutePath } from "../constants";
 
-const TwoFactorAuth = () => {
+interface Props {
+  secret: T2fa;
+  refetch: any;
+}
+
+const TwoFactorAuth = ({ secret, refetch }: Props) => {
+  const handleContinue = async () => {
+    await api_save2fa(secret.uid);
+    refetch();
+  };
   return (
     <div className="twofact-container">
-      {/* <TwoFactorSetup /> */}
-      <TwoFactorKey />
-      {/* <TwoFactorOtp /> */}
+      {secret.enabled ? (
+        <TwoFactorOtp secret={secret} />
+      ) : (
+        <TwoFactorKey secret={secret} handleContinue={handleContinue} />
+      )}
     </div>
   );
 };
 
-const TwoFactorSetup = () => {
-  return (
-    <div className="twofact-box-container">
-      <img src={BackArrowLong} alt="back" className="twofact-back" />
-      <div className="twofact-header">
-        <div className="twofact-title"> Two step verification </div>
-        <div className="twofact-text">
-          Secure your account with two-step verification
-        </div>
-      </div>
-      <img src={Lock} alt="lock" className="twofact-img" />
-      <div className="twofact-text">
-        Two step verification gives you additional security by requiring a
-        verification code whenever you sign in on new device.
-      </div>
-      <img src={Mobile} alt="lock" className="twofact-img" />
-      <div className="twofact-text">
-        Your phone number or Authenticator App helps us keep your account secure
-        by adding an additional layer of verification.
-      </div>
-      <div className="twofact-button"> Set up </div>
-    </div>
-  );
-};
+interface Props3 {
+  secret: T2fa;
+  handleContinue: () => any;
+}
 
-const TwoFactorKey = () => {
+const TwoFactorKey = ({ secret, handleContinue }: Props3) => {
   const [qrCode, setQrCode] = useState(false);
+  const [image, setimage] = useState("");
+
+  useEffect(() => {
+    QRCode.toDataURL(secret.url)
+      .then((url) => {
+        setimage(url);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  }, []);
+
   return qrCode ? (
     <div className="twofact-box-container">
       <img src={BackArrowLong} alt="back" className="twofact-back" />
@@ -62,10 +69,13 @@ const TwoFactorKey = () => {
       </div>
 
       <div className="twofact-key">
-        YDGQ7JRVJCSDZV45454NDI5DWAD664WD
+        {secret.secret}
         <img src={Copy} alt="copy" className="twofact-copy" />
       </div>
-      <div className="twofact-button"> Continue </div>
+      <div className="twofact-button" onClick={handleContinue}>
+        {" "}
+        Continue{" "}
+      </div>
       <div
         className="twofact-qrcode-opt"
         onClick={() => {
@@ -86,8 +96,11 @@ const TwoFactorKey = () => {
         1. Install Google Authenticator app or any other authenticator app of
         your choice on your mobile device to scan this QR code.
       </div>
-      <div className="twofact-key">qr-code string</div>
-      <div className="twofact-button"> Continue </div>
+      <img style={{ width: 200, height: 200 }} src={image} />
+      <div className="twofact-button" onClick={handleContinue}>
+        {" "}
+        Continue{" "}
+      </div>
       <div
         className="twofact-qrcode-opt"
         onClick={() => {
@@ -100,7 +113,22 @@ const TwoFactorKey = () => {
   );
 };
 
-const TwoFactorOtp = () => {
+interface Props2 {
+  secret: T2fa;
+}
+const TwoFactorOtp = ({ secret }: Props2) => {
+  const [otp, setotp] = useState(0);
+  const setTwoFactorAuth = useMainStore((state) => state.setTwoFactorAuth);
+  const navigate = useNavigate();
+
+  const handleContinue = async () => {
+    const result = await api_verify2fa(secret.uid, otp);
+    if (result) {
+      setTwoFactorAuth(true);
+      navigate(RoutePath.DASHBOARD);
+    } else alert("Invalid OTP");
+  };
+
   return (
     <div className="twofact-box-container">
       <img src={BackArrowLong} alt="back" className="twofact-back" />
@@ -112,11 +140,14 @@ const TwoFactorOtp = () => {
         </div>
       </div>
       <input
-        type="text"
+        type="number"
         className="twofact-otp"
         placeholder="Enter 6-digit code"
+        onChange={(e) => setotp(e.target.valueAsNumber)}
       />
-      <div className="twofact-button"> Continue </div>
+      <div className="twofact-button" onClick={handleContinue}>
+        Continue
+      </div>
     </div>
   );
 };

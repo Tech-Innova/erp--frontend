@@ -1,4 +1,5 @@
 import {
+  T2fa,
   TUserAuthModel,
   TUserLoginRequest,
   TUserOauthRequest,
@@ -146,6 +147,61 @@ export const api_loginUserOauth = async (userInfo: TUserOauthRequest) => {
   } catch (error) {
     console.error("users::api_loginUser ", error);
     alert(error);
+    return null;
+  }
+};
+
+export const api_save2fa = async (uid: number) => {
+  try {
+    const jwt_token = useMainStore.getState().jwtToken;
+    const res = await postRequest(
+      server + "user/create_2fa",
+      { uid },
+      jwt_token
+    );
+    if (res.status != 200) {
+      throw (await getJson(res)).message;
+    }
+  } catch (error) {
+    console.error("users::api_loginUser ", error);
+    alert(error);
+  }
+};
+
+export const api_get2fa = async (uid: number) => {
+  try {
+    const jwt_token = useMainStore.getState().jwtToken;
+    const res = await postRequest(
+      server + "user/get_2fa",
+      { user_id: uid },
+      jwt_token
+    );
+    if (res.status != 200) {
+      throw (await getJson(res)).message;
+    }
+    const data = await getJson(res);
+    return data as T2fa;
+  } catch (error) {
+    console.error("users::api_loginUser ", error);
+    return null;
+  }
+};
+
+export const api_verify2fa = async (uid: number, otp: number) => {
+  try {
+    const jwt_token = useMainStore.getState().jwtToken;
+    const res = await postRequest(
+      server + "user/verify_2fa",
+      { user_id: uid, otp },
+      jwt_token
+    );
+    if (res.status != 200) {
+      throw (await getJson(res)).message;
+    }
+    const data = await getJson(res);
+    return data.verified as boolean;
+  } catch (error) {
+    console.error("users::api_loginUser ", error);
     return null;
   }
 };
