@@ -1,9 +1,63 @@
 import "./styles/AuthForm.css";
 import Logo from "../assets/images/logo.png";
 import GoogleIcon from "../assets/icons/googleIcon.png";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useState } from "react";
+import Input from "./ui/Input";
+import {
+  TUserLoginRequest,
+  TUserOauthRequest,
+} from "@super_raptor911/erp-types";
+import {
+  api_loginUser,
+  api_getGoogleUserDetails,
+  api_loginUserOauth,
+} from "../api/users";
+import { useMainStore } from "../store";
+import { useGoogleLogin } from "@react-oauth/google";
 
 const LoginForm = () => {
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const setSignedIn = useMainStore((state) => state.setIsSignedIn);
+  const nav = useNavigate();
+
+  const login = useGoogleLogin({
+    onSuccess: (codeResponse) =>
+      api_getGoogleUserDetails(codeResponse.access_token).then((res) =>
+        handleGoogleLogin(res)
+      ),
+  });
+
+  const handleGoogleLogin = async (cred: any) => {
+    const user: TUserOauthRequest = {
+      name: cred.name,
+      username: cred.given_name + "_" + cred.family_name,
+      email: cred.email,
+      provider: "google",
+      createdBy: cred.given_name + "_" + cred.family_name,
+    };
+    const result = await api_loginUserOauth(user);
+    if (result) {
+      setSignedIn(result);
+      nav("/dashboard");
+    }
+  };
+
+  const handleSubmit = async (e: any) => {
+    e.preventDefault();
+    const user: TUserLoginRequest = {
+      username,
+      password,
+    };
+
+    const result = await api_loginUser(user);
+    setSignedIn(result);
+
+    !result && alert("Failed to signin");
+    result && nav("/dashboard");
+  };
+
   return (
     <div className="root">
       <div className="container">
@@ -15,28 +69,28 @@ const LoginForm = () => {
           </div>
         </div>
         <div className="formSec">
-          <form className="form">
-            <input
+          <form className="form" onSubmit={handleSubmit}>
+            <Input
               type="text"
-              placeholder="Email or Username"
+              placeholder="Username"
               className="inputField"
-            ></input>
+              value={username}
+              onChange={setUsername}
+            />
             <div>
-              <input
+              <Input
                 type="password"
                 placeholder="Password"
                 className="inputField"
-              ></input>
+                value={password}
+                onChange={setPassword}
+              />
               <div className="forgetPassword">Forget Password ?</div>
             </div>
-            <input
-              type="submit"
-              value="Sign In"
-              className="inputFieldButton"
-            ></input>
+            <input type="submit" value="Sign In" className="inputFieldButton" />
           </form>
           <p>or</p>
-          <button className="googleAuth">
+          <button className="googleAuth" onClick={() => login()}>
             <img src={GoogleIcon} alt="google-icon" className="google-icon" />
             <div>Continue with Google</div>
           </button>

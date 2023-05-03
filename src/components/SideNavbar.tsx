@@ -1,18 +1,16 @@
-import React, { useState } from "react";
 import "./styles/SideNavbar.css";
 import Sidebar from "../assets/icons/sidebar.png";
 import CloseSidebar from "../assets/icons/closeSidebar.png";
 import Logo from "../assets/images/logo.png";
-import { Link} from "react-router-dom";
-import { useSidebarStore } from '../store'
+import { Link } from "react-router-dom";
+import { useUIStore } from "../uiStore";
 
 const SideNavbar = () => {
-
-  const { sidebarOpen, setSidebarOpen } = useSidebarStore();
+  const { sidebarOpen, setSidebarOpen } = useUIStore();
 
   const handleSidebarToggle = () => {
     setSidebarOpen(!sidebarOpen);
-    console.log(sidebarOpen)
+    console.log(sidebarOpen);
   };
 
   return (

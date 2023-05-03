@@ -1,0 +1,19 @@
+@import '../../App.css';
+
+.logout-header-root{
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    width: 100px;
+    height: 60px;
+    font-size: 12px;
+    text-decoration: none;
+    color: var(--primary);
+}
+.logout-header-box{
+    display: flex;
+    flex-direction: column;
+    row-gap: 15px;
+    margin-top: 85px;
+    margin-left: 15px;
+}

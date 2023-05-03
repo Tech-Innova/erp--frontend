@@ -1,9 +1,65 @@
 import "./styles/AuthForm.css";
 import Logo from "../assets/images/logo.png";
 import GoogleIcon from "../assets/icons/googleIcon.png";
-import { Link } from "react-router-dom";
+import { Link, Outlet, useNavigate } from "react-router-dom";
+import { useState } from "react";
+import Input from "./ui/Input";
+import {
+  TUserOauthRequest,
+  TUserSignupRequest,
+} from "@super_raptor911/erp-types";
+
+import {
+  api_getGoogleUserDetails,
+  api_signupUser,
+  api_signupUserOauth,
+} from "../api/users";
+import { useGoogleLogin } from "@react-oauth/google";
+import TwoFactorAuth from "./TwoFactorAuth";
 
 const SignUpForm = () => {
+  const [name, setName] = useState("");
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("");
+  const nav = useNavigate();
+
+  const signup = useGoogleLogin({
+    onSuccess: (codeResponse) =>
+      api_getGoogleUserDetails(codeResponse.access_token).then((res) =>
+        handleGoogleLogin(res)
+      ),
+  });
+
+  const handleGoogleLogin = async (cred: any) => {
+    const user: TUserOauthRequest = {
+      name: cred.name,
+      username: cred.given_name + "_" + cred.family_name,
+      email: cred.email,
+      provider: "google",
+      createdBy: cred.given_name + "_" + cred.family_name,
+    };
+    const result = await api_signupUserOauth(user);
+    if (result) {
+      nav("/login");
+    }
+  };
+
+  const handleSubmit = async (e: any) => {
+    e.preventDefault();
+    const user: TUserSignupRequest = {
+      name,
+      username,
+      email,
+      password,
+      createdBy: username,
+    };
+    const result = await api_signupUser(user);
+    if (result) {
+      nav("/login");
+    }
+  };
+
   return (
     <div className="root">
       <div className="container">
@@ -13,32 +69,50 @@ const SignUpForm = () => {
           </Link>
         </div>
         <div className="formSec">
-          <form className="form">
-            <input
+          <form className="form" onSubmit={handleSubmit}>
+            <Input
               type="text"
               placeholder="Full Name"
               className="inputField"
-            ></input>
-            <input
+              value={name}
+              onChange={setName}
+              required
+            />
+            <Input
               type="text"
               placeholder="Email"
               className="inputField"
-            ></input>
-            <input
+              value={email}
+              onChange={setEmail}
+              required
+            />
+
+            <Input
               type="text"
               placeholder="Username"
               className="inputField"
-            ></input>
-            <input
+              value={username}
+              onChange={setUsername}
+              required
+            />
+
+            <Input
               type="password"
               placeholder="Password"
               className="inputField"
-            ></input>
-            <input
+              value={password}
+              onChange={setPassword}
+              required
+            />
+            <Input
               type="password"
               placeholder="Confirm Password"
               className="inputField"
-            ></input>
+              value={password}
+              onChange={setPassword}
+              required
+            />
+
             <input
               type="submit"
               value="Sign Up"
@@ -46,7 +120,7 @@ const SignUpForm = () => {
             ></input>
           </form>
           <p>or</p>
-          <button className="googleAuth">
+          <button className="googleAuth" onClick={() => signup()}>
             <img src={GoogleIcon} alt="google-icon" className="google-icon" />
             <div>Continue with Google</div>
           </button>

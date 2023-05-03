@@ -4,11 +4,19 @@ import "./styles/DashboardHeader.css";
 import Help from "../assets/icons/help-circle.png";
 import Bell from "../assets/icons/bell.png";
 import DefaultDp from "../assets/images/def-dp.png";
-import { useSidebarStore } from "../store";
+import { useUIStore } from "../uiStore";
+import { useMainStore } from "../store";
+import LogoutHeader from "./LogoutHeader";
 
+const roles = ["Super Admin", "Admin", "Staff"];
 const DashboardHeader = () => {
-  
-  const {sidebarOpen} = useSidebarStore();
+  const { sidebarOpen } = useUIStore();
+  const user = useMainStore((state) => state.user);
+  const [logActive, setLogActive] = useState(false);
+
+  const handleLogout = () => {
+    setLogActive(!logActive);
+  };
 
   return (
     <div className="root-dash-header">
@@ -41,12 +49,30 @@ const DashboardHeader = () => {
           </div>
 
           <div className="dash-header-user">
-            <img src={DefaultDp} alt="dp" className="dash-header-dp" />
+            <img
+              src={DefaultDp}
+              alt="dp"
+              className="dash-header-dp"
+              onClick={handleLogout}
+            />
+
             <div>
-              <div className="dash-header-username">Julian Wah </div>
-              <div className="dash-header-position">Sales Manager </div>
+              <div className="dash-header-username">{user?.username} </div>
+              <div className="dash-header-position">
+                {user && roles[user.access_level]}
+              </div>
             </div>
           </div>
+        </div>
+        <div
+          onClick={handleLogout}
+          className={
+            logActive
+              ? "dash-header-user-logout-active"
+              : "dash-header-user-logout"
+          }
+        >
+          <LogoutHeader />
         </div>
       </div>
     </div>

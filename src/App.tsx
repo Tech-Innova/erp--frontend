@@ -4,21 +4,40 @@ import Home from "./pages/Home";
 import Signup from "./pages/Signup";
 import Dashboard from "./pages/Dashboard";
 import Admin from "./components/Admin";
+import { useMainStore } from "./store";
+import { QueryClient, QueryClientProvider } from "react-query";
+import NotFound from "./pages/NotFound";
+import AuthLayout from "./components/AuthLayout";
+import TwoFactorAuth from "./components/TwoFactorAuth";
+
+const queryClient = new QueryClient();
 
 function App() {
+  const user = useMainStore((state) => state.user);
   return (
-    <div className="App">
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Signup />} />
-          <Route path="/dashboard" element={<Dashboard />}>
-            <Route path="admin" element={<Admin />}></Route>
-          </Route>
-        </Routes>
-      </BrowserRouter>
-    </div>
+    <QueryClientProvider client={queryClient}>
+      <div className="App">
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Signup />} />
+            <Route
+              path="/two-factor-authentication"
+              element={<TwoFactorAuth />}
+            />
+
+            <Route element={<AuthLayout />}>
+              <Route path="/dashboard" element={<Dashboard />}>
+                <Route path="admin" element={<Admin />}></Route>
+              </Route>
+            </Route>
+
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </BrowserRouter>
+      </div>
+    </QueryClientProvider>
   );
 }
 

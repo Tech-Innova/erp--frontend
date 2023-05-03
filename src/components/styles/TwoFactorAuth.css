@@ -1,0 +1,74 @@
+@import "../../App.css";
+
+.twofact-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f0f1f6;
+}
+
+.twofact-box-container{
+    background-color: var(--white);
+    display: flex;
+    flex-direction: column;
+    max-width: 460px;
+    max-height: 500px;
+    border-radius: 10px;
+    padding: 25px;
+    row-gap: 25px;
+    color: var(--black);
+}
+
+.twofact-back{
+    width: 30px;
+    height: 15px;
+    cursor: pointer;
+}
+
+.twofact-title{
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.twofact-text{
+    font-size: 16px;
+}
+
+.twofact-img{
+    width: 50px;
+    height: 50px;
+}
+
+.twofact-button{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 150px;
+    height: 40px;
+    font-size: 16px;
+    color: var(--white);
+    background-color: var(--primary);
+    font-weight: 600;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.twofact-key{
+    font-weight: 600;
+}
+
+.twofact-copy{
+    margin-left: 25px;
+    cursor: pointer;
+}
+
+.twofact-otp{
+    height: 50px;
+    border-radius: 8px;
+    border: 2px solid var(--grey);
+}
+::placeholder{
+    font-size: 16px;
+    color: var(--grey-dark);
+}

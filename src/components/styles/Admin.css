@@ -57,7 +57,7 @@
 
 /* This class contains the container for the users list */
 .admin-users-list-container {
-  width: 1200px;
+  width: 1300px;
   border: 1px solid var(--grey);
   margin-top: 50px;
   border-radius: 10px;
@@ -71,9 +71,8 @@
 
 /* This class contains the title for the headers in the users list */
 .admin-users-list-headers-title {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
   margin: 25px;
   font-weight: 600;
   font-size: 15px;
@@ -95,12 +94,20 @@
 
 /* This class contains the details of a user in the users list */
 .admin-user-details {
-  display: flex;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-template-rows: 1fr;
   margin: 25px;
   color: var(--grey-dark);
   font-weight: 500;
   font-size: 15px;
+}
+
+.admin-users-list-title {
+  max-width: 200px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 /* This class contains the title and status of a user in the users list */
@@ -153,7 +160,7 @@
     cursor: pointer;
     font-size: 12px;
   }
-  .admin-users-header-title-active{
+  .admin-users-header-title-active {
     font-size: 12px;
     color: var(--black);
   }
@@ -167,12 +174,12 @@
     cursor: pointer;
     font-size: 12px;
   }
-  
+
   .admin-users-header-bar {
     margin-right: 24px;
   }
   .admin-users-list-container {
-    width: 960px;
+    width: 1040px;
     margin-top: 40px;
     border-radius: 8px;
   }
@@ -194,7 +201,7 @@
     border-radius: 3px;
     font-size: 11px;
   }
-  .admin-users-list-delete{
+  .admin-users-list-delete {
     width: 19px;
     height: 19px;
   }
@@ -217,7 +224,7 @@
     cursor: pointer;
     font-size: 10px;
   }
-  .admin-users-header-title-active{
+  .admin-users-header-title-active {
     font-size: 10px;
     color: var(--black);
   }
@@ -235,7 +242,7 @@
     margin-right: 20px;
   }
   .admin-users-list-container {
-    width: 800px;
+    width: 867px;
     margin-top: 33px;
     border-radius: 7px;
   }
@@ -257,7 +264,7 @@
     border-radius: 3px;
     font-size: 9px;
   }
-  .admin-users-list-delete{
+  .admin-users-list-delete {
     width: 16px;
     height: 16px;
   }

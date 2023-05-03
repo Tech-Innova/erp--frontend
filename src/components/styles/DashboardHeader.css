@@ -52,9 +52,9 @@
 }
 
 /* Style the placeholder text in the search bar */
-::placeholder {
+input::placeholder {
   font-weight: 400;
-  font-size: 12px;
+  font: 12px sans-serif;
 }
 
 /* Style the help icon in the dashboard header */
@@ -72,6 +72,7 @@
   display: flex;
   column-gap: 8px;
   margin-left: 35px;
+  cursor: pointer;
 }
 
 /* Style the username in the user profile section */
@@ -79,6 +80,29 @@
   color: var(--black);
   font-weight: 600;
   font-size: 14px;
+  z-index: 10;
+}
+
+.dash-header-user-logout{
+  display: none;
+}
+
+.dash-header-user-logout-active{
+  border: 1px solid var(--grey);
+  z-index: 5;
+  position: fixed;
+  background-color: var(--white);
+  width: 100px;
+  cursor: pointer;
+  height: 150px;
+  font-size: 14px;
+  display: flex;
+  justify-content: center;
+  border-radius: 5px;
+  right: 0;
+  top: 0;
+  margin-right: 25px;
+  margin-top: 25px;
 }
 
 /* Media query for screens with a maximum width of 1536px */
@@ -101,7 +125,7 @@
     border-radius: 6px;
   }
 
-  ::placeholder {
+  input::placeholder {
     font-size: 10px;
   }
   .dash-header-help {
@@ -161,7 +185,7 @@
     border-radius: 5px;
   }
 
-  ::placeholder {
+  input::placeholder {
     font-size: 8px;
   }
   .dash-header-help {
