@@ -52,9 +52,9 @@
 }
 
 /* Style the placeholder text in the search bar */
-::placeholder {
+input::placeholder {
   font-weight: 400;
-  font-size: 12px;
+  font: 12px sans-serif;
 }
 
 /* Style the help icon in the dashboard header */
@@ -125,7 +125,7 @@
     border-radius: 6px;
   }
 
-  ::placeholder {
+  input::placeholder {
     font-size: 10px;
   }
   .dash-header-help {
@@ -185,7 +185,7 @@
     border-radius: 5px;
   }
 
-  ::placeholder {
+  input::placeholder {
     font-size: 8px;
   }
   .dash-header-help {

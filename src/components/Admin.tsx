@@ -9,6 +9,7 @@ import {
   api_modifyUserVerificationStatus,
 } from "../api/users";
 import { TUserAuthModel } from "@super_raptor911/erp-types";
+import Loader from "./Loader";
 
 const Admin = () => {
   const { sidebarOpen } = useUIStore();
@@ -125,7 +126,7 @@ const ActiveMembers = () => {
     "user_list",
     api_listUsers
   );
-  if (isLoading) return <div>Loading...</div>;
+  if (isLoading) return <div><Loader /></div>;
 
   const activeMembers = data?.filter((user) => user.is_verified);
 
@@ -173,6 +174,8 @@ const InactiveMembers = () => {
               <div className="admin-users-list-header"> Email Address</div>
               <div className="admin-users-list-header"> Full Name</div>
               <div className="admin-users-list-header"> Permission Status</div>
+            <div className="admin-users-list-header"> Verification Status</div>
+
             </div>
             <div className="admin-users-list-header-bar"></div>
           </div>

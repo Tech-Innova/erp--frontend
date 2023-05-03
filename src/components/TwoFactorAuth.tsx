@@ -3,12 +3,14 @@ import Lock from "../assets/icons/2fa-lock.png";
 import Mobile from "../assets/icons/2fa-mob.png";
 import Copy from "../assets/icons/copy-icon.png"
 import "./styles/TwoFactorAuth.css";
+import UserPermissions from "./UserPermissions";
 
 const TwoFactorAuth = () => {
   return <div className="twofact-container">
-    <TwoFactorSetup />
-    {/* <TwoFactorKey />
-    <TwoFactorOtp /> */}
+    {/* <TwoFactorSetup /> */}
+    {/* <TwoFactorKey /> */}
+    {/* <TwoFactorOtp /> */}
+    <UserPermissions />
   </div>;
 };
 
