@@ -15,7 +15,6 @@ import {
   api_signupUserOauth,
 } from "../api/users";
 import { useGoogleLogin } from "@react-oauth/google";
-import TwoFactorAuth from "./TwoFactorAuth";
 
 const SignUpForm = () => {
   const [name, setName] = useState("");
