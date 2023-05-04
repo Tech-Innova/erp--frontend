@@ -2,7 +2,7 @@ import "./styles/AuthForm.css";
 import Logo from "../assets/images/logo.png";
 import GoogleIcon from "../assets/icons/googleIcon.png";
 import { Link, useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Input from "./ui/Input";
 import {
   TUserLoginRequest,
@@ -17,10 +17,17 @@ import { useMainStore } from "../store";
 import { useGoogleLogin } from "@react-oauth/google";
 
 const LoginForm = () => {
+  const user = useMainStore((state) => state.user);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const setSignedIn = useMainStore((state) => state.setIsSignedIn);
   const nav = useNavigate();
+
+  useEffect(() => {
+    if (user) {
+      nav("/dashboard");
+    }
+  }, [user]);
 
   const login = useGoogleLogin({
     onSuccess: (codeResponse) =>
